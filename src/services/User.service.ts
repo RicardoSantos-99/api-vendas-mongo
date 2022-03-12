@@ -2,7 +2,7 @@ import CryptoJS from 'crypto-js';
 import mongoose from 'mongoose';
 import users from '../models/User';
 
-class UserService {
+class CreateUserService {
     
     /*******CRIA USUÁRIO ************/
     public async execute (nome:string, email:string, telefone:string){
@@ -53,25 +53,9 @@ class UserService {
         }
     }
 
-    /*******BUSCA USUÁRIO POR ID************/
-    public async findUserById(id: string) {
-        console.log(id)
-        return await users.findById(id);
-    }
-
-    /*******BUSCA USUÁRIO POR ID************/
-    public async findUserByEmail (email: string){
-        return await users.findOne({email});
-    }
-
     /*******ALTERA USUÁRIO ************/
     public async updateUser (nome:string,email:string){
         return true;
     }
-    
-    /*******DELETA USUÁRIO ************/
-    public async deleteUser (id: string){
-        return await users.findByIdAndDelete(id);
-    }
 }
-export {UserService};
+export {CreateUserService};

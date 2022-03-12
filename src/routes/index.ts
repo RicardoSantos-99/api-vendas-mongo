@@ -30,6 +30,6 @@ routes.use((req, res, next) => {
     next();
 });
 
-routes.use('/', usersRouter);
+routes.use('/usuarios', usersRouter);
 
 export default routes;

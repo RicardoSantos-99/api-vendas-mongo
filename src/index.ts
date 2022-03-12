@@ -1,5 +1,6 @@
 import express, { Request, Response, Application, NextFunction } from 'express';
 import 'express-async-errors';
+import { errors } from 'celebrate';
 import config from './config/config';
 import logging from './config/logging';
 import routes from './routes/index';
@@ -22,6 +23,7 @@ const PORT = process.env.PORT || 8000;
 
 app.use(express.json());
 app.use(routes);
+app.use(errors());
 
 app.use((err: Error, request: Request, response: Response, next: NextFunction ) =>{
     if(err instanceof Error){

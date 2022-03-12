@@ -1,69 +1,58 @@
 import { Request,  Response } from "express";
-import { UserService } from "../services/User.service";
-import {ListUserService} from "../services/ListUser.service";
+import { CreateUserService } from "../services/User.service";
+import { ListAllUserService } from "../services/ListAllUser.service";
+import { ShowUserService } from "../services/ShowUser.service";
+import { DeleteUserService } from "../services/DeleteUser.service";
+import { UpdateUserService } from "../services/UpdateUser.service";
 
 class CreateUserController {
     async handle(request: Request, response:Response) {
         const { nome, email, telefone } = request.body;
 
-        const userService = new UserService();
+        const createUser = new CreateUserService();
 
-        const user = await userService.execute(nome, email, telefone)
+        const user = await createUser.execute(nome, email, telefone)
 
         return response.json(user);
     }
     
-    /********************  BUSCA TODOS OS USUÁRIOS *******************/
     async findUsers(request:Request, response: Response ) {
-        const userService = new ListUserService();
+        const listUser = new ListAllUserService();
 
-        const users =  await userService.execute();
+        const users =  await listUser.execute();
         
         return response.json(users);
     }
     
-    /********************  BUSCA USUÁRIO PELO ID *******************/
     async findUserById(request: Request, response: Response) {
 
         const { id } = request.params;
 
-        const userService = new UserService();
+        const showUser = new ShowUserService();
 
-        const user = await userService.findUserById(id);
+        const user = await showUser.execute(id);
 
        return response.json(user);
     }
     
-
-    /********************  ALTERA DADOS DO USUARIO *******************/
     async updateUser (request:Request, response:Response) {
-        
-        const { nome, email } = request.body;
+        const {id} = request.params;
+        const user = {...request.body};
 
-        const userService = new UserService();
+        const updateUser = new UpdateUserService();
 
-        await userService.updateUser(nome, email).then((result) => {
-            return response.status(201).json({
-                usuario: result
-            });
-        })
-        .catch((error) => {
-            return response.status(500).json({
-                message: error.message,
-                error
-            });
-        });
+        await updateUser.execute(id, user);
+
+        return response.json({message: 'Usuário atualizado com sucesso.'});
     }
 
-
-    /********************  DELETA USUARIO *******************/
     async deleteUser (request:Request, response: Response ){
 
         const { id } = request.params;
 
-        const user = new UserService();
+        const deleteUser = new DeleteUserService();
 
-        await user.deleteUser(id);
+        await deleteUser.execute(id);
 
        return response.json({message: 'Usuário excluído com sucesso.'});
     }

@@ -1,14 +1,40 @@
 import { Router } from "express";
 import { CreateUserController } from "../controllers/User.controller";
+import { celebrate, Joi, Segments } from 'celebrate';
 
 const usersRouter = Router();
 
 const createUserController = new CreateUserController();
 
-usersRouter.post('/usuario', createUserController.handle);
-usersRouter.get('/usuarios', createUserController.findUsers);
-usersRouter.get('/usuarios/:id', createUserController.findUserById);
-usersRouter.put('/usuario/:id', createUserController.updateUser);
-usersRouter.delete('/usuario/:id', createUserController.deleteUser);
+usersRouter.post('/', celebrate({
+    [Segments.BODY]: {
+        nome: Joi.string().required(),
+        email: Joi.string().email().required(),
+        telefone: Joi.string().required(),
+    }
+}), createUserController.handle);
+
+usersRouter.get('/', createUserController.findUsers);
+usersRouter.get('/:id', celebrate({
+    [Segments.PARAMS]: {
+        id: Joi.string().required(),
+    }
+}), createUserController.findUserById);
+
+usersRouter.put('/:id', celebrate({
+    [Segments.PARAMS]: {
+        id: Joi.string().required(),
+    }, [Segments.BODY]: {
+        nome: Joi.string().required(),
+        email: Joi.string().email().required(),
+        telefone: Joi.string().required()
+    }
+}), createUserController.updateUser);
+
+usersRouter.delete('/:id', celebrate({
+    [Segments.PARAMS]: {
+        id: Joi.string().required(),
+    }
+}), createUserController.deleteUser);
 
 export default usersRouter;
