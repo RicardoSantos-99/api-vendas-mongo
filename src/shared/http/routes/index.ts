@@ -1,7 +1,7 @@
 import { Router } from "express";
-import logging from "../config/logging";
-import {usersRouter} from "./users.routes";
-import {sessionsRouter} from "./sessions.routes";
+import logging from "../../config/logging";
+import {usersRouter} from "../../../modules/user/http/routes/users.routes";
+import {sessionsRouter} from "../../../modules/user/http/routes/sessions.routes";
 
 const routes = Router();
 

@@ -1,9 +1,9 @@
 import { Request,  Response } from "express";
-import { CreateUserService } from "../services/CreateUser.service";
-import { ListAllUserService } from "../services/ListAllUser.service";
-import { ShowUserService } from "../services/ShowUser.service";
-import { DeleteUserService } from "../services/DeleteUser.service";
-import { UpdateUserService } from "../services/UpdateUser.service";
+import { CreateUserService } from "../../services/CreateUser.service";
+import { ListAllUserService } from "../../services/ListAllUser.service";
+import { ShowUserService } from "../../services/ShowUser.service";
+import { DeleteUserService } from "../../services/DeleteUser.service";
+import { UpdateUserService } from "../../services/UpdateUser.service";
 
 class CreateUserController {
     async create(request: Request, response:Response): Promise<Response> {

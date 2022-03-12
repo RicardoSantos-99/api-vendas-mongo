@@ -1,5 +1,5 @@
 import mongoose, { Schema } from 'mongoose';
-import logging from '../config/logging';
+import logging from '../../../shared/config/logging';
 import IUser from '../interfaces/User.interface';
 
 const UserSchema: Schema = new Schema(

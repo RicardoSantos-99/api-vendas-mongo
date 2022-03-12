@@ -1,8 +1,8 @@
 import express, { Request, Response, Application, NextFunction } from 'express';
 import 'express-async-errors';
 import { errors } from 'celebrate';
-import config from './config/config';
-import logging from './config/logging';
+import config from '../config/config';
+import logging from '../config/logging';
 import routes from './routes/index';
 import mongoose from 'mongoose';
 
