@@ -11,9 +11,9 @@ const MONGO_OPTIONS = {
     retryWrites: false
 };
 
-const MONGO_USERNAME = process.env.MONGO_USERNAME || 'teste';
-const MONGO_PASSWORD = process.env.MONGO_USERNAME || 'CA2zAYcVlUn3pIk9';
-const MONGO_HOST = process.env.MONGO_URL || `cluster0.yfkiy.mongodb.net/testeDev`;
+const MONGO_USERNAME = process.env.MONGO_USERNAME
+const MONGO_PASSWORD = process.env.MONGO_PASSWORD
+const MONGO_HOST = process.env.MONGO_HOST
 
 const MONGO = {
     host: MONGO_HOST,
