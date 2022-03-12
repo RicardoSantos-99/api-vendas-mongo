@@ -1,9 +1,9 @@
 import express, { Request, Response, Application, NextFunction } from 'express';
 import 'express-async-errors';
 import { errors } from 'celebrate';
-import config from '../config/config';
-import logging from '../config/logging';
-import routes from './routes/index';
+import config from '@shared/config/config';
+import logging from '@shared/config/logging';
+import routes from '@shared/http/routes/index';
 import mongoose from 'mongoose';
 
 const NAMESPACE = 'Server';

@@ -1,5 +1,5 @@
-import users from '../models/User';
-import IUser from '../interfaces/User.interface';
+import users from '@modules/user/models/User';
+import IUser from '@modules/user/interfaces/User.interface';
 
 interface IRequest {
     email: string;

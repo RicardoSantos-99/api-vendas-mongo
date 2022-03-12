@@ -1,6 +1,6 @@
 import CryptoJS from 'crypto-js';
 import mongoose from 'mongoose';
-import users from '../models/User';
+import users from '@modules/user/models/User';
 
 class CreateUserService {
     public async execute (nome:string, email:string, telefone:string){

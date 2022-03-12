@@ -1,7 +1,8 @@
 import { Router } from "express";
-import logging from "../../config/logging";
-import {usersRouter} from "../../../modules/user/http/routes/users.routes";
-import {sessionsRouter} from "../../../modules/user/http/routes/sessions.routes";
+import logging from "@shared/config/logging";
+import {usersRouter} from "@modules/user/http/routes/users.routes";
+import {sessionsRouter} from "@modules/user/http/routes/sessions.routes";
+import {productsRouter} from "@modules/product/http/routes/products.routes";
 
 const routes = Router();
 
@@ -33,5 +34,6 @@ routes.use((req, res, next) => {
 
 routes.use('/usuarios', usersRouter);
 routes.use('/sessions', sessionsRouter);
+routes.use('/products', productsRouter);
 
 export default routes;

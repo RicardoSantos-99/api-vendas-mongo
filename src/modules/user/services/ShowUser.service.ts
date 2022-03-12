@@ -1,4 +1,4 @@
-import users from '../models/User';
+import users from '@modules/user/models/User';
 
 class ShowUserService {
     async execute(id: string) {

@@ -1,9 +1,9 @@
 import { Request,  Response } from "express";
-import { CreateUserService } from "../../services/CreateUser.service";
-import { ListAllUserService } from "../../services/ListAllUser.service";
-import { ShowUserService } from "../../services/ShowUser.service";
-import { DeleteUserService } from "../../services/DeleteUser.service";
-import { UpdateUserService } from "../../services/UpdateUser.service";
+import { CreateUserService } from "@modules/user/services/CreateUser.service";
+import { ListAllUserService } from "@modules/user/services/ListAllUser.service";
+import { ShowUserService } from "@modules/user/services/ShowUser.service";
+import { DeleteUserService } from "@modules/user/services/DeleteUser.service";
+import { UpdateUserService } from "@modules/user/services/UpdateUser.service";
 
 class CreateUserController {
     async create(request: Request, response:Response): Promise<Response> {
@@ -55,7 +55,6 @@ class CreateUserController {
 
        return response.json({message: 'Usuário excluído com sucesso.'});
     }
-    
 }
 
 export {CreateUserController};

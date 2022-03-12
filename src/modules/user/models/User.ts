@@ -1,6 +1,6 @@
 import mongoose, { Schema } from 'mongoose';
-import logging from '../../../shared/config/logging';
-import IUser from '../interfaces/User.interface';
+import logging from '@shared/config/logging';
+import IUser from '@modules/user/interfaces/User.interface';
 
 const UserSchema: Schema = new Schema(
     {
