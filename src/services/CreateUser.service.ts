@@ -3,12 +3,10 @@ import mongoose from 'mongoose';
 import users from '../models/User';
 
 class CreateUserService {
-    
-    /*******CRIA USUÁRIO ************/
     public async execute (nome:string, email:string, telefone:string){
         
         if(!email || !nome || !telefone) {
-            throw new Error("Preencha os campos obrigatorios.")
+            throw new Error("Preencha os campos obrigatórios.")
         }
 
         const user = new users({
@@ -25,15 +23,12 @@ class CreateUserService {
         return user
     }
 
-    public async generaCode(nome:string,email:string){
-         if (this.validacaoEmail(email)){
-            return CryptoJS.SHA256(`${nome}-${email}`).toString(CryptoJS.enc.Hex);
-         } else{
-            return '';
-         }  
+    private async generaCode(nome:string,email:string) {
+        if (!this.validateEmail(email)) return ''
+        return CryptoJS.SHA256(`${nome}-${email}`).toString(CryptoJS.enc.Hex);
     }
 
-    public validacaoEmail(email:string) {
+    private validateEmail(email:string) {
         let usuario = email.substring(0, email.indexOf("@"));
         let dominio = email.substring(email.indexOf("@")+ 1, email.length);
         
@@ -52,10 +47,6 @@ class CreateUserService {
             throw new Error("Email Inválido")
         }
     }
-
-    /*******ALTERA USUÁRIO ************/
-    public async updateUser (nome:string,email:string){
-        return true;
-    }
 }
+
 export {CreateUserService};

@@ -1,12 +1,12 @@
 import { Request,  Response } from "express";
-import { CreateUserService } from "../services/User.service";
+import { CreateUserService } from "../services/CreateUser.service";
 import { ListAllUserService } from "../services/ListAllUser.service";
 import { ShowUserService } from "../services/ShowUser.service";
 import { DeleteUserService } from "../services/DeleteUser.service";
 import { UpdateUserService } from "../services/UpdateUser.service";
 
 class CreateUserController {
-    async handle(request: Request, response:Response) {
+    async create(request: Request, response:Response): Promise<Response> {
         const { nome, email, telefone } = request.body;
 
         const createUser = new CreateUserService();
@@ -24,7 +24,7 @@ class CreateUserController {
         return response.json(users);
     }
     
-    async findUserById(request: Request, response: Response) {
+    async findUserById(request: Request, response: Response): Promise<Response> {
 
         const { id } = request.params;
 
@@ -35,7 +35,7 @@ class CreateUserController {
        return response.json(user);
     }
     
-    async updateUser (request:Request, response:Response) {
+    async updateUser (request:Request, response:Response): Promise<Response> {
         const {id} = request.params;
         const user = {...request.body};
 
@@ -46,8 +46,7 @@ class CreateUserController {
         return response.json({message: 'Usuário atualizado com sucesso.'});
     }
 
-    async deleteUser (request:Request, response: Response ){
-
+    async deleteUser (request:Request, response: Response): Promise<Response> {
         const { id } = request.params;
 
         const deleteUser = new DeleteUserService();

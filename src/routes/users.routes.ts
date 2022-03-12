@@ -12,7 +12,7 @@ usersRouter.post('/', celebrate({
         email: Joi.string().email().required(),
         telefone: Joi.string().required(),
     }
-}), createUserController.handle);
+}), createUserController.create);
 
 usersRouter.get('/', createUserController.findUsers);
 usersRouter.get('/:id', celebrate({
@@ -37,4 +37,4 @@ usersRouter.delete('/:id', celebrate({
     }
 }), createUserController.deleteUser);
 
-export default usersRouter;
+export {usersRouter};
