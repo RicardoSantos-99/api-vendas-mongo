@@ -1,34 +1,42 @@
 {
-  "scripts": {
-    "start": "ts-node ./src/index.ts",
-    "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules --respawn ./src/shared/http/index.ts",
-    "lint": "eslint . --ext .ts",
-    "lint-fix": "eslint . --ext .ts --fix"
-  },
-  "dependencies": {
-    "celebrate": "^15.0.1",
-    "crypto-js": "^4.1.1",
-    "dotenv": "^10.0.0",
-    "express": "^4.17.1",
-    "express-async-errors": "^3.1.1",
-    "mongoose": "^6.0.12",
-    "uuid": "^8.3.2",
-    "winston": "^3.6.0"
-  },
-  "devDependencies": {
-    "@types/crypto-js": "^4.0.2",
-    "@types/express": "^4.17.13",
-    "@types/node": "^16.11.2",
-    "@types/uuid": "^8.3.4",
-    "@typescript-eslint/eslint-plugin": "^5.14.0",
-    "@typescript-eslint/parser": "^5.14.0",
-    "eslint": "^8.11.0",
-    "eslint-config-prettier": "6.15.0",
-    "eslint-plugin-prettier": "3.2.0",
-    "prettier": "^2.5.1",
-    "ts-node": "^10.3.1",
-    "ts-node-dev": "^1.1.8",
-    "tsconfig-paths": "^3.13.0",
-    "typescript": "^4.4.4"
-  }
+    "main": "src/shared/index.ts",
+    "repository": "https://github.com/RicardoSantos-99/api-vendas-mongo.git",
+    "author": "RicardoSantos-99 <ricardo2010carvalho@hotmail.com>",
+    "license": "MIT",
+    "scripts": {
+        "start": "ts-node ./src/index.ts",
+        "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules --respawn ./src/shared/http/index.ts",
+        "lint": "eslint . --ext .ts",
+        "lint-fix": "eslint . --ext .ts --fix"
+    },
+    "dependencies": {
+        "celebrate": "^15.0.1",
+        "crypto-js": "^4.1.1",
+        "dotenv": "^10.0.0",
+        "express": "^4.17.1",
+        "express-async-errors": "^3.1.1",
+        "mongoose": "^6.0.12",
+        "uuid": "^8.3.2",
+        "winston": "^3.6.0"
+    },
+    "devDependencies": {
+        "@commitlint/cli": "^16.2.1",
+        "commitlint-plugin-subject-references": "^0.1.1",
+        "@commitlint/config-conventional": "^16.2.1",
+        "@types/crypto-js": "^4.0.2",
+        "@types/express": "^4.17.13",
+        "@types/node": "^16.11.2",
+        "@types/uuid": "^8.3.4",
+        "@typescript-eslint/eslint-plugin": "^5.14.0",
+        "@typescript-eslint/parser": "^5.14.0",
+        "eslint": "^8.11.0",
+        "eslint-config-prettier": "6.15.0",
+        "eslint-plugin-prettier": "3.2.0",
+        "husky": "^7.0.4",
+        "prettier": "^2.5.1",
+        "ts-node": "^10.3.1",
+        "ts-node-dev": "^1.1.8",
+        "tsconfig-paths": "^3.13.0",
+        "typescript": "^4.4.4"
+    }
 }
