@@ -6,11 +6,11 @@ const UserSchema: Schema = new Schema(
     {
         nome: { type: String, required: true },
         email: { type: String, required: true },
-        codigo: { type: String, required: true }
+        codigo: { type: String, required: true },
     },
     {
-        timestamps: true
-    }
+        timestamps: true,
+    },
 );
 
 UserSchema.post<IUser>('save', function () {

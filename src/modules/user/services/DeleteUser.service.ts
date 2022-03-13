@@ -1,6 +1,6 @@
 import users from '@modules/user/models/User';
 
-class DeleteUserService{
+class DeleteUserService {
     async execute(id: string): Promise<void> {
         const user = await users.findById(id);
 
@@ -10,4 +10,4 @@ class DeleteUserService{
     }
 }
 
-export {DeleteUserService};
+export { DeleteUserService };

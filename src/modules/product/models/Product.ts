@@ -6,11 +6,11 @@ const ProductSchema: Schema = new Schema(
     {
         nome: { type: String, required: true },
         codigo: { type: String, required: true },
-        valor: { type: Number, required: true }
+        valor: { type: Number, required: true },
     },
     {
-        timestamps: true
-    }
+        timestamps: true,
+    },
 );
 
 ProductSchema.post<IProduct>('save', function () {

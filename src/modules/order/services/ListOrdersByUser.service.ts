@@ -14,16 +14,21 @@ interface IFilter {
     createdAt: {
         $gte: Date;
         $lte?: Date;
-    }
+    };
     produtos?: {
         $elemMatch: {
             codigo: string;
-        }
-    } 
+        };
+    };
 }
 
 class ListOrdersByUserService {
-    async execute({userId, dataInicial, dataFinal, codigo}: IRequest): Promise<IOrder[]> {
+    async execute({
+        userId,
+        dataInicial,
+        dataFinal,
+        codigo,
+    }: IRequest): Promise<IOrder[]> {
         const showUser = new ShowUserService();
 
         const user = await showUser.execute(userId);
@@ -34,15 +39,16 @@ class ListOrdersByUserService {
             user: userId,
             createdAt: {
                 $gte: new Date(dataInicial),
-            }
-        }
+            },
+        };
 
-        if (dataFinal) filter.createdAt.$lte = new Date(dataFinal)
-        if (codigo) filter.produtos = {
-            $elemMatch: {
-                codigo: codigo
-            }
-        }
+        if (dataFinal) filter.createdAt.$lte = new Date(dataFinal);
+        if (codigo)
+            filter.produtos = {
+                $elemMatch: {
+                    codigo: codigo,
+                },
+            };
 
         return await Order.find(filter);
     }

@@ -1,60 +1,62 @@
-import { Request,  Response } from "express";
-import { CreateUserService } from "@modules/user/services/CreateUser.service";
-import { ListAllUserService } from "@modules/user/services/ListAllUser.service";
-import { ShowUserService } from "@modules/user/services/ShowUser.service";
-import { DeleteUserService } from "@modules/user/services/DeleteUser.service";
-import { UpdateUserService } from "@modules/user/services/UpdateUser.service";
+import { Request, Response } from 'express';
+import { CreateUserService } from '@modules/user/services/CreateUser.service';
+import { ListAllUserService } from '@modules/user/services/ListAllUser.service';
+import { ShowUserService } from '@modules/user/services/ShowUser.service';
+import { DeleteUserService } from '@modules/user/services/DeleteUser.service';
+import { UpdateUserService } from '@modules/user/services/UpdateUser.service';
 
 class CreateUserController {
-    async create(request: Request, response:Response): Promise<Response> {
+    async create(request: Request, response: Response): Promise<Response> {
         const { nome, email, telefone } = request.body;
 
         const createUser = new CreateUserService();
 
-        const user = await createUser.execute(nome, email, telefone)
+        const user = await createUser.execute(nome, email, telefone);
 
         return response.json(user);
     }
-    
-    async findUsers(request:Request, response: Response ) {
+
+    async findUsers(request: Request, response: Response) {
         const listUser = new ListAllUserService();
 
-        const users =  await listUser.execute();
-        
+        const users = await listUser.execute();
+
         return response.json(users);
     }
-    
-    async findUserById(request: Request, response: Response): Promise<Response> {
 
+    async findUserById(
+        request: Request,
+        response: Response,
+    ): Promise<Response> {
         const { id } = request.params;
 
         const showUser = new ShowUserService();
 
         const user = await showUser.execute(id);
 
-       return response.json(user);
+        return response.json(user);
     }
-    
-    async updateUser (request:Request, response:Response): Promise<Response> {
-        const {id} = request.params;
-        const user = {...request.body};
+
+    async updateUser(request: Request, response: Response): Promise<Response> {
+        const { id } = request.params;
+        const user = { ...request.body };
 
         const updateUser = new UpdateUserService();
 
         await updateUser.execute(id, user);
 
-        return response.json({message: 'Usuário atualizado com sucesso.'});
+        return response.json({ message: 'Usuário atualizado com sucesso.' });
     }
 
-    async deleteUser (request:Request, response: Response): Promise<Response> {
+    async deleteUser(request: Request, response: Response): Promise<Response> {
         const { id } = request.params;
 
         const deleteUser = new DeleteUserService();
 
         await deleteUser.execute(id);
 
-       return response.json({message: 'Usuário excluído com sucesso.'});
+        return response.json({ message: 'Usuário excluído com sucesso.' });
     }
 }
 
-export {CreateUserController};
+export { CreateUserController };

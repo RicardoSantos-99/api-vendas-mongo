@@ -1,13 +1,12 @@
 import mongoose from 'mongoose';
 import products from '@modules/product/models/Product';
 import IProducts from '@modules/product/interfaces/Product.interface';
-import {v4 as uuid} from 'uuid'
+import { v4 as uuid } from 'uuid';
 
 class CreateProductService {
     async execute(nome: string, valor: number): Promise<IProducts> {
-
-        if(!nome || !valor) {
-            throw new Error("Preencha os campos obrigatórios.")
+        if (!nome || !valor) {
+            throw new Error('Preencha os campos obrigatórios.');
         }
 
         const product = new products({
@@ -15,11 +14,11 @@ class CreateProductService {
             nome,
             codigo: uuid(),
             valor,
-        })
-        
-        product.save()
+        });
 
-        return product
+        product.save();
+
+        return product;
     }
 }
 

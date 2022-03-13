@@ -6,11 +6,11 @@ const OrderSchema: Schema = new Schema(
     {
         user: { type: String, required: true },
         produtos: { type: Array, required: true },
-        valor: { type: Number, required: true }
+        valor: { type: Number, required: true },
     },
     {
-        timestamps: true
-    }
+        timestamps: true,
+    },
 );
 
 OrderSchema.post<IOrder>('save', function () {

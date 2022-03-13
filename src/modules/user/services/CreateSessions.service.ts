@@ -7,7 +7,7 @@ interface IRequest {
 }
 
 class CreateSessionService {
-    async execute({email, codigo}: IRequest): Promise<IUser> {
+    async execute({ email, codigo }: IRequest): Promise<IUser> {
         const user = await users.findOne({ email });
 
         if (!user) throw new Error('Usuário não encontrado');

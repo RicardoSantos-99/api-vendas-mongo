@@ -7,4 +7,4 @@ class ListAllUserService {
     }
 }
 
-export {ListAllUserService};
+export { ListAllUserService };
