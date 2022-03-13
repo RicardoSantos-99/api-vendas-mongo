@@ -17,4 +17,17 @@ ordersRouter.post('/', celebrate({
     }
 }), orderController.create);
 
+ordersRouter.get('/', orderController.listAllOrders);
+
+ordersRouter.get('/:userId', celebrate({
+    [Segments.PARAMS]: {
+        userId: Joi.string().required()
+    },
+    [Segments.QUERY]: {
+        dataInicial: Joi.string().required(),
+        dataFinal: Joi.string(),
+        codigo: Joi.string()
+    }
+}), orderController.listOrdersByUser);
+
 export { ordersRouter };
