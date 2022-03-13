@@ -1,11 +1,5 @@
 import { Document } from 'mongoose';
-
-interface IProduct {
-    _id: string;
-    nome: string;
-    valor: number;
-    quantidade: number;
-}
+import IProduct from '@modules/product/interfaces/Product.interface';
 
 export default interface IOrder extends Document {
     user: string;

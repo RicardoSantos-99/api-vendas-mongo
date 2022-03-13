@@ -1,32 +1,19 @@
 import { Request,  Response } from "express";
-
+import {CreateOrderService} from "@modules/order/services/CreateOrder.service";
 class OrderController {
-    async create(request: Request, response:Response): Promise<Response> {
-       
-        return response.json({oi: 'oi'});
-    }
-    
-    async findUsers(request:Request, response: Response ) {
-        
-        return response.json({user: 'oi'});
+    async create(request: Request, response: Response): Promise<Response> {
+        const { userId, products } = request.body;
 
-    }
-    
-    async findUserById(request: Request, response: Response): Promise<Response> {
+        const createOrder = new CreateOrderService();
 
-       return response.json({user: 'oi'});
-    }
-    
-    async updateUser (request:Request, response:Response): Promise<Response> {
-       
-        return response.json({message: 'Usuário atualizado com sucesso.'});
-    }
+        const order = await createOrder.execute({
+            userId,
+            products
+        });
 
-    async deleteUser (request:Request, response: Response): Promise<Response> {
-       
-
-       return response.json({message: 'Usuário excluído com sucesso.'});
+        return response.json(order);
     }
+   
 }
 
 export {OrderController};
