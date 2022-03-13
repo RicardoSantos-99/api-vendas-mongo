@@ -40,6 +40,8 @@ module.exports = {
             [
                 'Global',
                 'User',
+                'Product',
+                'Order',
             ],
         ]
     },

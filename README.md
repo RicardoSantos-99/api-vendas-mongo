@@ -22,3 +22,6 @@ api desenvolvida para teste de uma empresa.
 
 ### Outras opções para commit
 `build ,chore, ci, docs, feat, fix , perf, refactor, revert, style, test, config`
+
+### Opções para escopo do commit
+`Global, User, Product, Order`
