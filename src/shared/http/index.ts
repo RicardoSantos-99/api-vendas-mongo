@@ -5,6 +5,7 @@ import config from '@shared/config/config';
 import logging from '@shared/config/logging';
 import routes from '@shared/http/routes/index';
 import mongoose from 'mongoose';
+import AppError from '@shared/errors/AppError';
 
 const NAMESPACE = 'Server';
 
@@ -28,7 +29,7 @@ app.use(errors());
 
 app.use(
     (err: Error, request: Request, response: Response, next: NextFunction) => {
-        if (err instanceof Error) {
+        if (err instanceof AppError) {
             return response.status(400).json({
                 error: err.message,
             });
