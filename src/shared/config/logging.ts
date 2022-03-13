@@ -1,54 +1,72 @@
-const info = (namespace: string, message: string, object?: any) => {
-    if (object) {
-        console.info(
-            `[${getTimeStamp()}] [INFO] [${namespace}] ${message}`,
-            object,
+import winston from 'winston';
+
+class Logging {
+    private logger: winston.Logger;
+
+    constructor() {
+        const levels = {
+            error: 0,
+            warn: 1,
+            info: 2,
+            http: 3,
+            debug: 4,
+        };
+
+        const levelLog = () => {
+            const env = process.env.NODE_ENV || 'development';
+            const isDevelopment = env === 'development';
+            return isDevelopment ? 'debug' : 'warn';
+        };
+
+        const colors = {
+            error: 'red',
+            warn: 'yellow',
+            info: 'green',
+            http: 'magenta',
+            debug: 'blue',
+            log: 'gray',
+        };
+
+        winston.addColors(colors);
+
+        const format = winston.format.combine(
+            winston.format.label({ label: 'api' }),
+            winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
+            winston.format.colorize({ all: true }),
+            winston.format.printf(({ level, message, label, timestamp }) => {
+                return `${timestamp} [${label}] ${level}: ${message}`;
+            }),
         );
-    } else {
-        console.info(`[${getTimeStamp()}] [INFO] [${namespace}] ${message}`);
+
+        const transports = [new winston.transports.Console()];
+
+        this.logger = winston.createLogger({
+            level: levelLog(),
+            levels,
+            format,
+            transports,
+        });
     }
-};
 
-const warn = (namespace: string, message: string, object?: any) => {
-    if (object) {
-        console.warn(
-            `[${getTimeStamp()}] [WARN] [${namespace}] ${message}`,
-            object,
-        );
-    } else {
-        console.warn(`[${getTimeStamp()}] [WARN] [${namespace}] ${message}`);
+    public info(message: string): void {
+        this.logger.info(message);
     }
-};
 
-const error = (namespace: string, message: string, object?: any) => {
-    if (object) {
-        console.error(
-            `[${getTimeStamp()}] [ERROR] [${namespace}] ${message}`,
-            object,
-        );
-    } else {
-        console.error(`[${getTimeStamp()}] [ERROR] [${namespace}] ${message}`);
+    public error(message: string): void {
+        this.logger.error(message);
     }
-};
 
-const debug = (namespace: string, message: string, object?: any) => {
-    if (object) {
-        console.debug(
-            `[${getTimeStamp()}] [DEBUG] [${namespace}] ${message}`,
-            object,
-        );
-    } else {
-        console.debug(`[${getTimeStamp()}] [DEBUG] [${namespace}] ${message}`);
+    public warn(message: string): void {
+        this.logger.warn(message);
     }
-};
 
-const getTimeStamp = (): string => {
-    return new Date().toISOString();
-};
+    public debug(message: string): void {
+        this.logger.debug(message);
+    }
 
-export default {
-    info,
-    warn,
-    error,
-    debug,
-};
+    public http(message: string): void {
+        this.logger.http(message);
+    }
+}
+
+export default new Logging();

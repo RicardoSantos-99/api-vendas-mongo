@@ -9,14 +9,14 @@ import AppError from '@shared/errors/AppError';
 
 const NAMESPACE = 'Server';
 
-logging.info('Mongo URL', config.mongo.url);
+logging.info(`Mongo URL ${config.mongo.url}`);
 mongoose
     .connect(config.mongo.url, config.mongo.options)
     .then(result => {
-        logging.info(NAMESPACE, 'Mongo Connected');
+        logging.info(`${NAMESPACE} - MongoDB connected`);
     })
     .catch(error => {
-        logging.error(NAMESPACE, error.message, error);
+        logging.error(`${NAMESPACE} - ${error.message} - ${error}`);
     });
 
 const app: Application = express();
@@ -42,5 +42,5 @@ app.use(
 );
 
 app.listen(PORT, (): void => {
-    console.log(`Server Running here 👉 http://localhost:${PORT}`);
+    logging.info(`Server Running here 👉 http://localhost:${PORT}`);
 });
