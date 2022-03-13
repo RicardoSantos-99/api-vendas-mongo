@@ -1,4 +1,6 @@
 {
+    "name": "api-vendas-mongo",
+    "version": "1.0.0",
     "main": "src/shared/index.ts",
     "repository": "https://github.com/RicardoSantos-99/api-vendas-mongo.git",
     "author": "RicardoSantos-99 <ricardo2010carvalho@hotmail.com>",
