@@ -3,7 +3,11 @@ import User from '@modules/user/interfaces/User.interface';
 
 class FindUserByEmailService {
     public async execute(email: string): Promise<User | null> {
-        return await users.findOne({ email });
+        const user = await users.findOne({ email });
+
+        if (!user) throw new Error('Usuário não encontrado');
+
+        return user;
     }
 }
 
