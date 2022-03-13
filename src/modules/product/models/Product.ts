@@ -14,7 +14,7 @@ const ProductSchema: Schema = new Schema(
 );
 
 ProductSchema.post<IProduct>('save', function () {
-    logging.info('Mongo', 'Checkout the Usuario we just saved: ', this);
+    logging.info(`Mongo - Checkout the Product we just saved: ${this}`);
 });
 
 export default mongoose.model<IProduct>('Products', ProductSchema);

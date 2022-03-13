@@ -10,17 +10,20 @@ const routes = Router();
 /** Log the request */
 routes.use((req, res, next) => {
     /** Log the req */
-    logging.info(
-        `METHOD: [${req.method}]`,
-        `URL: [${req.url}] - IP: [${req.socket.remoteAddress}]`,
-    );
+    logging.info(`
+        METHOD: [${req.method}] -
+        URL: [${req.url}] - 
+        IP: [${req.socket.remoteAddress}]
+    `);
 
     res.on('finish', () => {
         /** Log the res */
-        logging.info(
-            `METHOD: [${req.method}]`,
-            `URL: [${req.url}] - STATUS: [${res.statusCode}] - IP: [${req.socket.remoteAddress}]`,
-        );
+        logging.info(`
+            METHOD: [${req.method}] -
+            URL: [${req.url}] - 
+            STATUS: [${res.statusCode}] - 
+            IP: [${req.socket.remoteAddress}]
+        `);
     });
 
     next();
@@ -45,7 +48,7 @@ routes.use((req, res, next) => {
     next();
 });
 
-routes.use('/usuarios', usersRouter);
+routes.use('/users', usersRouter);
 routes.use('/sessions', sessionsRouter);
 routes.use('/products', productsRouter);
 routes.use('/orders', ordersRouter);

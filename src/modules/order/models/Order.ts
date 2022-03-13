@@ -14,7 +14,7 @@ const OrderSchema: Schema = new Schema(
 );
 
 OrderSchema.post<IOrder>('save', function () {
-    logging.info('Mongo', 'Checkout the Usuario we just saved: ', this);
+    logging.info(`Mongo - Checkout the Order we just saved: ${this}`);
 });
 
 export default mongoose.model<IOrder>('Orders', OrderSchema);

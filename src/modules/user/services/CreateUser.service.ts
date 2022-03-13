@@ -1,6 +1,6 @@
 import CryptoJS from 'crypto-js';
 import mongoose from 'mongoose';
-import users from '@modules/user/models/User';
+import Users from '@modules/user/models/User';
 
 class CreateUserService {
     public async execute(nome: string, email: string, telefone: string) {
@@ -8,26 +8,26 @@ class CreateUserService {
             throw new Error('Preencha os campos obrigatórios.');
         }
 
-        const user = new users({
+        const user = new Users({
             _id: new mongoose.Types.ObjectId(),
             nome,
             email,
             telefone,
         });
 
-        const code = await this.generaCode(nome, email);
-        user.codigo = code;
+        user.codigo = await this.generaCode(nome, email);
         user.save();
 
         return user;
     }
 
     private async generaCode(nome: string, email: string) {
-        if (!this.validateEmail(email)) return '';
-        return CryptoJS.SHA256(`${nome}-${email}`).toString(CryptoJS.enc.Hex);
+        return !this.validateEmail(email)
+            ? ''
+            : CryptoJS.SHA256(`${nome}-${email}`).toString(CryptoJS.enc.Hex);
     }
 
-    private validateEmail(email: string) {
+    protected validateEmail(email: string) {
         const usuario = email.substring(0, email.indexOf('@'));
         const dominio = email.substring(email.indexOf('@') + 1, email.length);
 

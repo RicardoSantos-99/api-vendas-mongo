@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import products from '@modules/product/models/Product';
+import Products from '@modules/product/models/Product';
 import IProducts from '@modules/product/interfaces/Product.interface';
 import { v4 as uuid } from 'uuid';
 
@@ -9,7 +9,7 @@ class CreateProductService {
             throw new Error('Preencha os campos obrigatórios.');
         }
 
-        const product = new products({
+        const product = new Products({
             _id: new mongoose.Types.ObjectId(),
             nome,
             codigo: uuid(),

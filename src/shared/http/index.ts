@@ -1,4 +1,4 @@
-import express, { Request, Response, Application, NextFunction } from 'express';
+import express, { Request, Response, Application } from 'express';
 import 'express-async-errors';
 import { errors } from 'celebrate';
 import config from '@shared/config/config';
@@ -12,7 +12,7 @@ const NAMESPACE = 'Server';
 logging.info(`Mongo URL ${config.mongo.url}`);
 mongoose
     .connect(config.mongo.url, config.mongo.options)
-    .then(result => {
+    .then(() => {
         logging.info(`${NAMESPACE} - MongoDB connected`);
     })
     .catch(error => {
@@ -27,19 +27,17 @@ app.use(express.json());
 app.use(routes);
 app.use(errors());
 
-app.use(
-    (err: Error, request: Request, response: Response, next: NextFunction) => {
-        if (err instanceof AppError) {
-            return response.status(400).json({
-                error: err.message,
-            });
-        }
-        return response.status(500).json({
-            status: 'error',
-            message: 'Internal server Error',
+app.use((err: Error, request: Request, response: Response) => {
+    if (err instanceof AppError) {
+        return response.status(400).json({
+            error: err.message,
         });
-    },
-);
+    }
+    return response.status(500).json({
+        status: 'error',
+        message: 'Internal server Error',
+    });
+});
 
 app.listen(PORT, (): void => {
     logging.info(`Server Running here 👉 http://localhost:${PORT}`);

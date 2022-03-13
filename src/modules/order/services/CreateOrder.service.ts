@@ -36,13 +36,11 @@ class CreateOrderService {
             return total + product.valor;
         }, 0);
 
-        const order = await Order.create({
+        return await Order.create({
             user: userId,
             produtos: products,
             valor,
         });
-
-        return order;
     }
 }
 
